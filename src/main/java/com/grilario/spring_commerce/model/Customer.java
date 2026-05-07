@@ -4,8 +4,6 @@ import java.time.LocalDate;
 
 import org.hibernate.annotations.CreationTimestamp;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +17,6 @@ import lombok.Setter;
 @Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
-@JsonPropertyOrder({ "id", "name", "customerSince" })
 public class Customer {
   @Id
   @Getter
@@ -33,5 +30,5 @@ public class Customer {
 
   @Getter
   @CreationTimestamp
-  private LocalDate customerSince;
+  private LocalDate since;
 }

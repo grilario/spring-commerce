@@ -24,8 +24,11 @@ public class CustomerController {
     return customerRepository.findAll();
   }
 
+  record CustomerCreate(String name) {
+  }
+
   @PostMapping("/create")
-  public Customer create(@RequestBody CustomerCreateDTO data) {
+  public Customer create(@RequestBody CustomerCreate data) {
     return customerRepository.save(new Customer(data.name));
   }
 
@@ -45,8 +48,4 @@ public class CustomerController {
     customerRepository.delete(customer);
     return customer;
   }
-}
-
-class CustomerCreateDTO {
-  public String name;
 }
