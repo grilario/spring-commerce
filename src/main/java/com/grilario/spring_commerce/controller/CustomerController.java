@@ -1,6 +1,8 @@
 package com.grilario.spring_commerce.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,8 +30,10 @@ public class CustomerController {
   }
 
   @PostMapping("")
-  public Customer create(@RequestBody CustomerCreate data) {
-    return customerRepository.save(new Customer(data.name));
+  public ResponseEntity<Customer> create(@RequestBody CustomerCreate data) {
+    Customer customer = customerRepository.save(new Customer(data.name));
+
+    return new ResponseEntity<Customer>(customer, HttpStatus.CREATED);
   }
 
   @GetMapping("/{id}")
@@ -44,8 +48,8 @@ public class CustomerController {
     Customer customer = customerRepository
         .findById(id)
         .orElseThrow(() -> new ResourceNotFoundException());
-
     customerRepository.delete(customer);
+
     return customer;
   }
 }
