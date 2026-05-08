@@ -13,13 +13,13 @@ import com.grilario.spring_commerce.errors.ResourceNotFoundException;
 import com.grilario.spring_commerce.model.Customer;
 import com.grilario.spring_commerce.repository.CustomerRepository;
 
-@RestController("")
+@RestController()
 @RequestMapping("/customers")
 public class CustomerController {
   @Autowired
   private CustomerRepository customerRepository;
 
-  @GetMapping("/")
+  @GetMapping("")
   public Iterable<Customer> list() {
     return customerRepository.findAll();
   }
@@ -27,7 +27,7 @@ public class CustomerController {
   record CustomerCreate(String name) {
   }
 
-  @PostMapping("/create")
+  @PostMapping("")
   public Customer create(@RequestBody CustomerCreate data) {
     return customerRepository.save(new Customer(data.name));
   }
